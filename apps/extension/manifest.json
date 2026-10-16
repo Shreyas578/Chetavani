@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Chetavani — Arkiv Anti-Scam Shield",
+  "version": "1.0.0",
+  "description": "Community-run scam protection for India on Arkiv DB-Chain. Warns against phishing, fake loan portals, and digital arrest traps.",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Chetavani Shield"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@chetavani/seed",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate-wallets": "node src/generate-wallets.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "@arkiv-network/sdk": "^0.8.1",
+    "dotenv": "^16.4.5",
+    "viem": "^2.21.0"
+  }
+}
