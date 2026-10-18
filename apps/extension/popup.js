@@ -1,4 +1,4 @@
-// Load real on-chain registry
+// Load real on-chain registry & live sync
 fetch('live-registry.json')
   .then(res => res.json())
   .then(liveRecords => {
@@ -12,6 +12,30 @@ fetch('live-registry.json')
 
         document.getElementById('domainDisplay').textContent = domain;
 
+        const statusBadge = document.getElementById('statusBadge');
+        const reasonText = document.getElementById('reasonText');
+        const reportBtn = document.getElementById('reportBtn');
+
+        reportBtn.href = `https://chetavani.vercel.app?report=${encodeURIComponent(domain)}`;
+
+        function applyMatchedRecord(record) {
+          statusBadge.textContent = '🚨 CONFIRMED SCAM ON ARKIV';
+          statusBadge.className = 'badge badge-warn';
+          const txInfo = record.txHash
+            ? `<div style="margin-top: 4px; font-size: 10px;">
+                <a href="https://tiramisu.explorer.arkiv.network/tx/${record.txHash}" target="_blank" style="color: #ff9933; text-decoration: underline;">
+                  🔗 View Real On-Chain Tx on Tiramisu
+                </a>
+              </div>`
+            : `<div style="margin-top: 4px; font-size: 10px; color: #f59e0b;">⚡ Pending Community Peer Confirms</div>`;
+
+          reasonText.innerHTML = `
+            <div><strong>Threat:</strong> ${record.payload?.title || record.category}</div>
+            ${txInfo}
+          `;
+        }
+
+        // 1. Check bundled registry
         const matchedRecord = liveRecords.find(r => r.indicator.toLowerCase() === domain);
 
         // High risk TLDs or lookalikes
@@ -19,21 +43,8 @@ fetch('live-registry.json')
         const hasSuspiciousTld = suspiciousTlds.some(tld => domain.endsWith(tld));
         const isSbiLookalike = domain.includes('sbi') && domain !== 'onlinesbi.sbi' && domain !== 'sbi.co.in';
 
-        const statusBadge = document.getElementById('statusBadge');
-        const reasonText = document.getElementById('reasonText');
-        const reportBtn = document.getElementById('reportBtn');
-
         if (matchedRecord) {
-          statusBadge.textContent = '🚨 CONFIRMED SCAM ON ARKIV';
-          statusBadge.className = 'badge badge-warn';
-          reasonText.innerHTML = `
-            <div><strong>Threat:</strong> ${matchedRecord.payload?.title || matchedRecord.category}</div>
-            <div style="margin-top: 4px; font-size: 10px;">
-              <a href="https://tiramisu.explorer.arkiv.network/tx/${matchedRecord.txHash}" target="_blank" style="color: #ff9933; text-decoration: underline;">
-                🔗 View Real On-Chain Tx on Tiramisu
-              </a>
-            </div>
-          `;
+          applyMatchedRecord(matchedRecord);
         } else if (hasSuspiciousTld || isSbiLookalike) {
           statusBadge.textContent = 'High Scam Risk Flagged';
           statusBadge.className = 'badge badge-warn';
@@ -41,12 +52,24 @@ fetch('live-registry.json')
             ? 'Warning: Typo-squatting or unofficial domain mimicking State Bank of India.'
             : 'Warning: Suspicious TLD associated with transient fraud campaigns.';
         } else {
-          statusBadge.textContent = 'Verified Clean on Arkiv';
-          statusBadge.className = 'badge badge-safe';
-          reasonText.textContent = 'Verified clean against current Tiramisu block state.';
+          // Check live API for newly reported domains
+          fetch(`https://chetavani.vercel.app/api/registry?check=${encodeURIComponent(domain)}`)
+            .then(r => r.json())
+            .then(data => {
+              if (data.found && data.report) {
+                applyMatchedRecord(data.report);
+              } else {
+                statusBadge.textContent = 'Verified Clean on Arkiv';
+                statusBadge.className = 'badge badge-safe';
+                reasonText.textContent = 'Verified clean against current Tiramisu block state.';
+              }
+            })
+            .catch(() => {
+              statusBadge.textContent = 'Verified Clean on Arkiv';
+              statusBadge.className = 'badge badge-safe';
+              reasonText.textContent = 'Verified clean against current Tiramisu block state.';
+            });
         }
-
-        reportBtn.href = `https://chetavani.vercel.app?report=${encodeURIComponent(domain)}`;
       } catch (err) {
         document.getElementById('domainDisplay').textContent = 'Internal Browser Page';
       }

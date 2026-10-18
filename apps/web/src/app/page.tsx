@@ -87,6 +87,13 @@ export default function Home() {
     };
 
     setReports([newReport, ...reports]);
+
+    // Sync to live registry API so Chrome Extension and Telegram Bot reflect it immediately
+    fetch('/api/registry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).catch((err) => console.warn('Failed to sync to registry API:', err));
   };
 
   const handleConfirm = (key: string) => {
