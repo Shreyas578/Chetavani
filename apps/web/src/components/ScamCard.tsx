@@ -38,8 +38,9 @@ export const ScamCard: React.FC<ScamCardProps> = ({
       .replace(/_/g, ' ')
       .replace(/v1|v2/gi, '');
 
-    const sampleText = report.payload?.sampleText ? ` उदाहरण संदेश: "${report.payload.sampleText}"` : '';
-    const sampleTextEn = report.payload?.sampleText ? ` Sample message: "${report.payload.sampleText}"` : '';
+    const sample = report.payload?.sampleTemplate;
+    const sampleText = sample ? ` उदाहरण संदेश: "${sample}"` : '';
+    const sampleTextEn = sample ? ` Sample message: "${sample}"` : '';
 
     let warningSpeech = '';
     if (currentLang === 'hi') {
