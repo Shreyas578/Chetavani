@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@arkiv-network/sdk": "^0.8.1",
-    "@chetavani/arkiv-client": "*",
     "clsx": "^2.1.1",
     "grammy": "^1.46.0",
     "lucide-react": "^0.453.0",

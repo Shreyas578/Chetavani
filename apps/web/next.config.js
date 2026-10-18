@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@chetavani/arkiv-client'],
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,

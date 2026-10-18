@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { X, Send, Mic, ShieldAlert, Sparkles } from 'lucide-react';
-import { IndicatorKind, ScamCategory, SupportedLanguage } from '@chetavani/arkiv-client';
+import { IndicatorKind, ScamCategory, SupportedLanguage } from '@/arkiv-client';
 import { LanguageCode, translations } from '@/lib/i18n';
 import { startVoiceRecognition } from '@/lib/voice';
 

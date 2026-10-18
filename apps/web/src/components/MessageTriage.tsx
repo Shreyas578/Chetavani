@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { extractAndSanitizeMessage, ExtractedIndicators } from '@/lib/analyzer';
 import { checkLookalikeRisk, LookalikeRisk } from '@/lib/lookalike';
-import { ChetavaniReport } from '@chetavani/arkiv-client';
+import { ChetavaniReport } from '@/arkiv-client';
 import { LanguageCode, translations } from '@/lib/i18n';
 import { playVoiceWarning } from '@/lib/voice';
 

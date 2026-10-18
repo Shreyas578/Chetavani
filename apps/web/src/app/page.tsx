@@ -13,7 +13,7 @@ import {
   Eye,
   ExternalLink,
 } from 'lucide-react';
-import { ChetavaniReport, ScamCategory } from '@chetavani/arkiv-client';
+import { ChetavaniReport, ScamCategory } from '@/arkiv-client';
 import { LanguageCode, translations } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { ScamCard } from '@/components/ScamCard';

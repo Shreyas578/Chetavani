@@ -10,7 +10,7 @@ import {
   FileText,
   Clock,
 } from 'lucide-react';
-import { ChetavaniReport } from '@chetavani/arkiv-client';
+import { ChetavaniReport } from '@/arkiv-client';
 import { LanguageCode } from '@/lib/i18n';
 
 import liveRegistryData from '@/lib/live-registry.json';

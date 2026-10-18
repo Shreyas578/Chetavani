@@ -10,7 +10,7 @@ import {
   ExternalLink,
   Share2,
 } from 'lucide-react';
-import { ChetavaniReport } from '@chetavani/arkiv-client';
+import { ChetavaniReport } from '@/arkiv-client';
 import { LanguageCode, translations } from '@/lib/i18n';
 import { playVoiceWarning } from '@/lib/voice';
 
