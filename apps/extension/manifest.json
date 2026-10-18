@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Community-run scam protection for India on Arkiv DB-Chain. Warns against phishing, fake loan portals, and digital arrest traps.",
   "permissions": ["activeTab", "storage"],
+  "host_permissions": ["https://chetavani.vercel.app/*", "*://*/*"],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Chetavani Shield",

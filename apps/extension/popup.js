@@ -52,24 +52,50 @@ fetch('live-registry.json')
             ? 'Warning: Typo-squatting or unofficial domain mimicking State Bank of India.'
             : 'Warning: Suspicious TLD associated with transient fraud campaigns.';
         } else {
-          // Check live API for newly reported domains
-          fetch(`https://chetavani.vercel.app/api/registry?check=${encodeURIComponent(domain)}`)
-            .then(r => r.json())
-            .then(data => {
-              if (data.found && data.report) {
-                applyMatchedRecord(data.report);
-              } else {
+          // Check local storage for user-reported domains in this browser
+          chrome.storage.local.get(['reportedDomains'], (storageRes) => {
+            const userReported = storageRes.reportedDomains || [];
+            if (userReported.includes(domain)) {
+              applyMatchedRecord({
+                indicator: domain,
+                payload: {
+                  title: 'Community Reported Scam Indicator',
+                  description: 'Reported directly by community user via Chetavani Shield.',
+                },
+              });
+              return;
+            }
+
+            // Check live API for newly reported domains
+            fetch(`https://chetavani.vercel.app/api/registry?check=${encodeURIComponent(domain)}`)
+              .then(r => r.json())
+              .then(data => {
+                if (data.found && data.report) {
+                  applyMatchedRecord(data.report);
+                } else {
+                  statusBadge.textContent = 'Verified Clean on Arkiv';
+                  statusBadge.className = 'badge badge-safe';
+                  reasonText.textContent = 'Verified clean against current Tiramisu block state.';
+                }
+              })
+              .catch(() => {
                 statusBadge.textContent = 'Verified Clean on Arkiv';
                 statusBadge.className = 'badge badge-safe';
                 reasonText.textContent = 'Verified clean against current Tiramisu block state.';
-              }
-            })
-            .catch(() => {
-              statusBadge.textContent = 'Verified Clean on Arkiv';
-              statusBadge.className = 'badge badge-safe';
-              reasonText.textContent = 'Verified clean against current Tiramisu block state.';
-            });
+              });
+          });
         }
+
+        // Whenever user clicks report, save to chrome.storage.local so warning stays active immediately!
+        reportBtn.addEventListener('click', () => {
+          chrome.storage.local.get(['reportedDomains'], (res) => {
+            const list = res.reportedDomains || [];
+            if (!list.includes(domain)) {
+              list.push(domain);
+              chrome.storage.local.set({ reportedDomains: list });
+            }
+          });
+        });
       } catch (err) {
         document.getElementById('domainDisplay').textContent = 'Internal Browser Page';
       }

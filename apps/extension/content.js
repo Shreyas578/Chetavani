@@ -94,11 +94,34 @@
         return;
       }
 
-      // 2. Query live Chetavani API for newly reported dynamic threats in real time
+      // 2. Check chrome.storage.local for user-reported indicators in this browser
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+        chrome.storage.local.get(['reportedDomains'], (res) => {
+          const userReported = res.reportedDomains || [];
+          const localMatch = userReported.find((d) =>
+            currentHostname === d.toLowerCase() ||
+            currentHostname.endsWith(`.${d.toLowerCase()}`) ||
+            d.toLowerCase().includes(currentHostname)
+          );
+
+          if (localMatch) {
+            showWarningBanner({
+              indicator: currentHostname,
+              payload: {
+                title: 'Community Reported Scam Indicator',
+                description: 'Reported directly by community user via Chetavani Shield.',
+              },
+            });
+            return;
+          }
+        });
+      }
+
+      // 3. Query live Chetavani API for newly reported dynamic threats in real time
       fetch(`https://chetavani.vercel.app/api/registry?check=${encodeURIComponent(currentHostname)}`)
         .then((res) => res.json())
         .then((apiRes) => {
-          if (apiRes.found && apiRes.report) {
+          if (apiRes && apiRes.found && apiRes.report) {
             showWarningBanner(apiRes.report);
           }
         })
