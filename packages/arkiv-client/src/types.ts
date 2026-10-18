@@ -31,6 +31,7 @@ export interface DisputePayload {
 
 export interface ChetavaniReport {
   key: string;
+  txHash?: string;
   kind: IndicatorKind;
   indicator: string;
   category: ScamCategory;

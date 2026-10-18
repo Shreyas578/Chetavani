@@ -29,6 +29,30 @@ This log records real, specific, and reproducible friction points, SDK edge case
   ```
 * **Suggested Fix:** Ensure `entity.toJson()` has uniform TypeScript typings and fallback behavior in public client select queries.
 
+### Entry 3: `createEntity` Return Value Structure (`txHash` vs `entityKey`)
+* **Date:** 2026-10-17
+* **Component:** `walletClient.createEntity()` return value
+* **Observation:** In some community guides, developers assume `createEntity` returns only a single transaction hash string (`0x...`). In `@arkiv-network/sdk` 0.8.x, it actually returns a structured object:
+  ```ts
+  {
+    txHash: '0x...',
+    entityKey: '0x...',
+    expiresAt: 793041n
+  }
+  ```
+* **Impact / Error:** Attempting to treat the return value as a primitive hex string causes `[object Object]` formatting in logs or explorer link construction.
+* **Workaround:** Extracted `result.txHash` and `result.entityKey` explicitly:
+  ```ts
+  const txHash = result.txHash || result;
+  const entityKey = result.entityKey || txHash;
+  ```
+* **Suggested Fix:** Clarify the return signature of `createEntity()` in the TypeScript type definition docs to highlight the structured return payload.
+
 ---
 
-*(More live entries will be appended continuously as we test writes, confirmations, and subscriptions on Tiramisu)*
+### Entry 4: `atBlock` Parameter Typing (`bigint` vs Hex String)
+* **Date:** 2026-10-17
+* **Component:** `publicClient.select().atBlock()`
+* **Observation:** In Viem, block numbers can often be provided as hex strings (`0x...`). In `@arkiv-network/sdk` 0.8.x, the `.atBlock()` builder strictly enforces a `bigint` parameter. Passing a hex string triggers TS2345 type errors.
+* **Workaround:** Coerced block inputs to `BigInt(blockNumber)` prior to query invocation.
+* **Suggested Fix:** Accept both `bigint` and `0x${string}` in `.atBlock()` for seamless compatibility with Viem block representations.

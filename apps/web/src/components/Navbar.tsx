@@ -24,12 +24,16 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-saffron to-amber-600 text-white shadow-lg shadow-cyber-saffron/20">
-            <ShieldAlert className="w-7 h-7" />
+          <div className="relative flex items-center justify-center w-12 h-12 rounded-xl overflow-hidden border border-cyber-border shadow-lg shadow-cyber-saffron/20 bg-cyber-card">
+            <img
+              src="/logo.jpg"
+              alt="Chetavani Cyber-Garuda Crest"
+              className="w-full h-full object-cover"
+            />
             {isLive && (
-              <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+              <span className="absolute top-1 right-1 flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-emerald opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-cyber-emerald border-2 border-cyber-bg"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyber-emerald"></span>
               </span>
             )}
           </div>
@@ -75,14 +79,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             </select>
           </div>
 
-          {/* Explorer Link */}
+          {/* Telegram Bot Link */}
           <a
-            href="https://tiramisu.explorer.arkiv.network"
+            href="https://t.me/ChetavaniShieldBot"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden lg:flex items-center gap-1 text-xs text-cyber-saffron hover:text-cyber-saffronLight font-medium transition-colors px-2 py-1"
+            title="Open Chetavani Telegram Shield Bot"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-sky-950/40 hover:bg-sky-900/60 text-sky-400 border border-sky-500/30 transition-colors"
           >
-            <span>Arkiv Explorer</span>
+            <span>Telegram Bot</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+
+          {/* Download Extension Button */}
+          <a
+            href="/chetavani-extension.zip"
+            download="chetavani-extension.zip"
+            title="Download Chrome MV3 Extension"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-cyber-card hover:bg-cyber-saffron/15 text-cyber-saffron border border-cyber-border hover:border-cyber-saffron/40 transition-colors"
+          >
+            <span>Chrome Shield (Zip)</span>
+          </a>
+
+          {/* Explorer Link directly to funded Creator Wallet */}
+          <a
+            href="https://tiramisu.explorer.arkiv.network/address/0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="View Creator Wallet on Tiramisu Explorer"
+            className="hidden lg:flex items-center gap-1 text-xs text-cyber-saffron hover:text-cyber-saffronLight font-medium transition-colors px-2 py-1 bg-cyber-card border border-cyber-border rounded-lg"
+          >
+            <span>Registry Wallet (0xe7b...c42D)</span>
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>

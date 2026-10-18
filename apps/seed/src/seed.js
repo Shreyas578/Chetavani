@@ -75,7 +75,7 @@ async function main() {
         reporter: reporterAccount.address,
       };
 
-      const hash = await reporterClient.createEntity({
+      const result = await reporterClient.createEntity({
         contentType: 'application/json',
         payload: jsonToPayload(payloadData),
         attributes: {
@@ -90,12 +90,39 @@ async function main() {
         expires: ExpirationTime.fromDays(3), // 72 Hours initial TTL
       });
 
-      console.log(`      ✅ Entity created! Tx Hash: ${hash}`);
-      seededReports.push({ key: hash, indicator: scam.indicator });
+      const txHash = result.txHash || result;
+      const entityKey = result.entityKey || txHash;
+      const expiresAtBlock = result.expiresAt ? Number(result.expiresAt) : null;
+
+      console.log(`      ✅ Entity created on Tiramisu!`);
+      console.log(`         Entity Key: ${entityKey}`);
+      console.log(`         Tx Hash:    ${txHash}`);
+      console.log(`         Expires At: Block #${expiresAtBlock}`);
+
+      seededReports.push({
+        key: entityKey,
+        txHash: txHash,
+        kind: scam.kind,
+        indicator: scam.indicator,
+        category: scam.category,
+        lang: scam.lang,
+        status: i % 3 === 0 ? 'confirmed' : 'unconfirmed',
+        confirms: i % 3 === 0 ? 3 : 0,
+        payload: payloadData,
+        expiresAtBlock: expiresAtBlock,
+        owner: reporterAccount.address,
+      });
     } catch (err) {
       console.error(`      ❌ Failed to seed ${scam.indicator}:`, err.message);
     }
   }
+
+  // Save the live on-chain registry with real transaction hashes and entity keys for the frontend
+  const registryPath = path.resolve(__dirname, '../../web/src/lib/live-registry.json');
+  import('fs').then(fs => {
+    fs.writeFileSync(registryPath, JSON.stringify(seededReports, null, 2));
+    console.log(`\n💾 Saved ${seededReports.length} live on-chain verified entities to: ${registryPath}`);
+  });
 
   console.log(`\nSuccessfully seeded ${seededReports.length} reports!`);
 

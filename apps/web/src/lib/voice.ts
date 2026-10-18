@@ -11,7 +11,7 @@ const SPEECH_LANG_MAP: Record<LanguageCode, string> = {
 };
 
 /**
- * Native Web Speech Synthesis: speaks a localized audio warning alert
+ * Native Web Speech Synthesis: speaks a localized audio warning alert reliably across all browsers
  */
 export function playVoiceWarning(text: string, lang: LanguageCode) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
@@ -22,24 +22,41 @@ export function playVoiceWarning(text: string, lang: LanguageCode) {
   // Cancel any ongoing speech
   window.speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = SPEECH_LANG_MAP[lang] || 'hi-IN';
-  utterance.rate = 0.95; // Slightly slower for clarity
-  utterance.pitch = 1.0;
+  const doSpeak = () => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const targetLang = SPEECH_LANG_MAP[lang] || 'hi-IN';
+    utterance.lang = targetLang;
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
 
-  // Try to find a matching Indian accent voice
+    const voices = window.speechSynthesis.getVoices();
+    if (voices && voices.length > 0) {
+      // Find matching language voice
+      const matched = voices.find(
+        (v) =>
+          v.lang.toLowerCase() === targetLang.toLowerCase() ||
+          v.lang.toLowerCase().replace('_', '-').startsWith(lang)
+      );
+      if (matched) {
+        utterance.voice = matched;
+      }
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // Chrome on Windows sometimes requires voices to be loaded asynchronously
   const voices = window.speechSynthesis.getVoices();
-  const matchedVoice = voices.find(
-    (v) =>
-      v.lang.toLowerCase() === SPEECH_LANG_MAP[lang]?.toLowerCase() ||
-      v.lang.toLowerCase().startsWith(lang)
-  );
-
-  if (matchedVoice) {
-    utterance.voice = matchedVoice;
+  if (!voices || voices.length === 0) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.onvoiceschanged = null;
+      doSpeak();
+    };
+    // Also trigger immediate speak attempt in case onvoiceschanged does not fire
+    setTimeout(doSpeak, 50);
+  } else {
+    doSpeak();
   }
-
-  window.speechSynthesis.speak(utterance);
 }
 
 /**

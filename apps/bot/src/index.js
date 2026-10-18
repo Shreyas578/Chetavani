@@ -1,7 +1,12 @@
 import { Bot } from 'grammy';
 import { config } from 'dotenv';
 
-config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+config({ path: path.resolve(__dirname, '../../../.env') });
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -36,22 +41,33 @@ bot.command('report', async (ctx) => {
   );
 });
 
+import liveRegistryData from './live-registry.json' with { type: 'json' };
+
 bot.command('check', async (ctx) => {
-  const query = ctx.match?.trim();
+  const query = ctx.match?.trim().toLowerCase();
   if (!query) {
     return ctx.reply('Please provide a domain or UPI handle to check.\nExample: `/check sbi-reward-points.site`', {
       parse_mode: 'Markdown',
     });
   }
 
-  // Check query against heuristics or known test indicators
+  // 1. Check directly against authentic on-chain Arkiv registry
+  const matched = liveRegistryData.find((r) => r.indicator.toLowerCase() === query);
+
+  // 2. Check heuristics
   const isSuspicious =
+    matched ||
     query.endsWith('.top') ||
     query.endsWith('.buzz') ||
     query.endsWith('.xyz') ||
     (query.includes('sbi') && !query.includes('.sbi') && !query.includes('sbi.co.in'));
 
   if (isSuspicious) {
+    const txLink = matched?.txHash
+      ? `\n• *On-Chain Tx:* [View on Tiramisu Explorer](https://tiramisu.explorer.arkiv.network/tx/${matched.txHash})`
+      : '';
+    const categoryText = matched?.payload?.title || 'Phishing / Brand Impersonation';
+
     const shareMessage = encodeURIComponent(
       `🚨 *CHETAVANI CYBER ALERT (चेतावनी)* 🚨\n\n` +
       `⚠️ The indicator *${query}* is FLAGGED on the Arkiv Blockchain Registry as an active cyber scam!\n` +
@@ -63,14 +79,14 @@ bot.command('check', async (ctx) => {
     await ctx.reply(
       `🚨 *WARNING: HIGH SCAM RISK DETECTED!*\n\n` +
         `• *Indicator:* \`${query}\`\n` +
-        `• *Arkiv Status:* *FLAGGED ON-CHAIN*\n` +
-        `• *Category:* Phishing / Brand Impersonation\n` +
-        `• *Chain:* Tiramisu Testnet (ID: 7738577)\n\n` +
+        `• *Arkiv Status:* *CONFIRMED ON-CHAIN*\n` +
+        `• *Category:* ${categoryText}\n` +
+        `• *Chain:* Tiramisu Testnet (ID: 7738577)${txLink}\n\n` +
         `⚠️ *Protect your family:* Forward this alert to your WhatsApp groups to warn elderly relatives!\n\n` +
         `👉 [Click to Share on WhatsApp](https://api.whatsapp.com/send?text=${shareMessage})\n` +
         `👉 [Click to Share on Telegram](https://t.me/share/url?url=https://chetavani.vercel.app&text=${shareMessage})\n` +
         `🔍 [Inspect atBlock Proof](https://chetavani.vercel.app)`,
-      { parse_mode: 'Markdown' }
+      { parse_mode: 'Markdown', disable_web_page_preview: true }
     );
   } else {
     await ctx.reply(

@@ -36,7 +36,13 @@ export const ScamCard: React.FC<ScamCardProps> = ({
     if (currentLang === 'hi') {
       warningSpeech = `चेतावनी! यह सूचक ${report.indicator} एक संदिग्ध फ्रॉड के रूप में दर्ज है। श्रेणी: ${t.categories[report.category] || report.category}। किसी भी प्रकार का भुगतान या ओटीपी साझा न करें।`;
     } else if (currentLang === 'mr') {
-      warningSpeech = `सावधान! ${report.indicator} ही संशयास्पद सायबर फसवणूक म्हणून नोंदवली गेली आहे. स्वतःची माहिती कोणासही देऊ नका.`;
+      warningSpeech = `सावधान! ${report.indicator} ही संशयास्पद सायबर फसवणूक म्हणून नोंदवली गेली आहे. कोणासही स्वतःची माहिती किंवा ओटीपी देऊ नका.`;
+    } else if (currentLang === 'ta') {
+      warningSpeech = `எச்சரிக்கை! ${report.indicator} ஆபத்தான இணைய மோசடியாக பதிவு செய்யப்பட்டுள்ளது. பணப் பரிமாற்றம் செய்யாதீர்கள்.`;
+    } else if (currentLang === 'te') {
+      warningSpeech = `హెచ్చరిక! ${report.indicator} సైబర్ మోసంగా నమోదు చేయబడింది. ఎవరికీ ఓటీపీ లేదా డబ్బులు పంపవద్దు.`;
+    } else if (currentLang === 'bn') {
+      warningSpeech = `সতর্কতা! ${report.indicator} একটি বিপজ্জনক সাইবার প্রতারণা হিসেবে চিহ্নিত হয়েছে। কোনো ওটিপি বা টাকা পাঠাবেন না।`;
     } else {
       warningSpeech = `Warning! The indicator ${report.indicator} has been flagged for ${report.payload?.title || report.category}. Do not transfer funds or share sensitive OTPs.`;
     }
@@ -143,6 +149,20 @@ export const ScamCard: React.FC<ScamCardProps> = ({
             <Share2 className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">WhatsApp Alert</span>
           </a>
+
+          {/* Direct Explorer On-Chain Link */}
+          {report.txHash && (
+            <a
+              href={`https://tiramisu.explorer.arkiv.network/tx/${report.txHash}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View Real On-Chain Transaction on Tiramisu Explorer"
+              className="text-[11px] font-mono text-cyber-saffron hover:underline flex items-center gap-1"
+            >
+              <span>Tx: {report.txHash.slice(0, 6)}...{report.txHash.slice(-4)}</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          )}
 
           {/* Cryptographic Proof Link */}
           {onInspectProof && (

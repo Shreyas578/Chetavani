@@ -1,0 +1,404 @@
+[
+  {
+    "key": "0x5ddf16c0e2f933ae3f9a82ce28803d5a52b18566f2cc787f5b4ec4c5d21776e8",
+    "txHash": "0xc12438ef7fe90cacdce3701773e150aa6b956f1e37d995ef2bad9fa9e28404fe",
+    "kind": "domain",
+    "indicator": "cbi-mumbai-cybercell-verification.buzz",
+    "category": "digital_arrest",
+    "lang": "hi",
+    "status": "confirmed",
+    "confirms": 3,
+    "payload": {
+      "title": "Fake CBI Digital Arrest Video Notice Portal",
+      "description": "Fraudulent portal displaying forged Supreme Court & CBI summons. Scammers on Skype/WhatsApp compel victims to transfer funds into \"RBI asset verification escrow\".",
+      "sampleTemplate": "URGENT NOTICE: CBI Case #AR-9812 registered against your Aadhaar. Connect Skype within 15 min or face immediate Digital Arrest. Check warrant: {{url}}",
+      "severity": "critical",
+      "tags": [
+        "digital_arrest",
+        "cbi_impersonation",
+        "skype_extortion",
+        "fake_warrant"
+      ],
+      "createdAt": 1792176644548,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793041,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xc46b9c88603c21a39ab044f6ebe3f29319adfca70c0eea3c90c63bc0809d3ca5",
+    "txHash": "0x9f7b8f27bea4e43f7d781cbd16c497699b4ecbcdf2046aef66610cbddd1fe3cc",
+    "kind": "domain",
+    "indicator": "delhipolice-cybercrime-clearance.online",
+    "category": "digital_arrest",
+    "lang": "en",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Delhi Police Narcotics Department Spoofed Clearance Page",
+      "description": "Fake clearance certificate generator used during WhatsApp video calls where scammers dress in police uniform and demand money for drug parcel clearance.",
+      "sampleTemplate": "FedEx Customs Parcel containing illicit contraband intercepted under your name. Clearance fine required: {{url}}",
+      "severity": "critical",
+      "tags": [
+        "digital_arrest",
+        "fedex_scam",
+        "narcotics_spoof"
+      ],
+      "createdAt": 1792176650696,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793044,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x07a0ee92ee6a79018326e3211873c1797c8479ae760c499e666484c879722628",
+    "txHash": "0x3c552ac6d5ab2a4e8b2ca1e32af385d66808b96ec4b07c088b2ab3253bd2113d",
+    "kind": "template",
+    "indicator": "template-mumbai-cyber-arrest-summons-v1",
+    "category": "digital_arrest",
+    "lang": "mr",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Mumbai Cyber Cell Marathi Video Summon Template",
+      "description": "Extortion notice sent to senior citizens in Maharashtra claiming their SIM card was used for terror financing, demanding instant Skype presence.",
+      "sampleTemplate": "तात्काळ सूचना: आपल्या आधार कार्डवर मनी लाँडरिंगचा गुन्हा दाखल झाला आहे. अटक टाळण्यासाठी त्वरित संपर्क करा.",
+      "severity": "high",
+      "tags": [
+        "digital_arrest",
+        "marathi_template",
+        "senior_citizen_target"
+      ],
+      "createdAt": 1792176656397,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793047,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xd9a69c8ab9f76121a411efb956eff3074218e0fb7163644b23d7032ebfc8b663",
+    "txHash": "0x29a98a02438f9ece97f16d6334b2f652493bf37f972271d7b94c6e1a6ce5483b",
+    "kind": "app",
+    "indicator": "com.fastpaisa.instantcredit.loanapp",
+    "category": "loan_app",
+    "lang": "en",
+    "status": "confirmed",
+    "confirms": 3,
+    "payload": {
+      "title": "FastPaisa Instant 7-Day Micro Loan Sideload APK",
+      "description": "Predatory APK distributed via SMS links that exfiltrates contacts and photo gallery, followed by abusive extortion calls to family members.",
+      "sampleTemplate": "Approved Rs 50,000 instant loan in 2 minutes without CIBIL. Download APK now: {{url}}",
+      "severity": "critical",
+      "tags": [
+        "loan_shark",
+        "contact_theft",
+        "blackmail",
+        "apk_malware"
+      ],
+      "createdAt": 1792176662294,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793050,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xf0809eab73a61f6c9f56a3b9487d851e4f07e147af2a3a7304c78b409d1904a3",
+    "txHash": "0x5dd7c2015d1b69704f44f570862083a566b361092db681ab61c01e440e8675fd",
+    "kind": "app",
+    "indicator": "com.bharatloan.easycash.microfinance",
+    "category": "loan_app",
+    "lang": "hi",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "BharatLoan Easy Cash Malicious Harassment App",
+      "description": "Disburses only 60% of loan amount, charges 200% interest in 6 days, then circulates morphed photos to WhatsApp contact groups.",
+      "sampleTemplate": "लोन अप्रूव हो गया है! ₹75,000 तुरंत अपने बैंक में प्राप्त करें बिना किसी कागजात के: {{url}}",
+      "severity": "critical",
+      "tags": [
+        "loan_shark",
+        "morphing_photos",
+        "unauthorized_nbfc"
+      ],
+      "createdAt": 1792176668062,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793052,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xc30e482d1436e7282693bf1c5043f3a3216e1b50d2cf62358b08b285225bf9e9",
+    "txHash": "0x4fbffa7b7fcc6e10ccb96af1cda95a166c3074f4c8165933c0363294fd626407",
+    "kind": "domain",
+    "indicator": "quickdhan-instant-approval-apk.top",
+    "category": "loan_app",
+    "lang": "te",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "QuickDhan Instant Andhra/Telangana Loan Distribution Site",
+      "description": "Phishing domain masquerading as an RBI-registered NBFC offering quick credit to college students and gig workers.",
+      "sampleTemplate": "సులభమైన రుణం ₹1,00,000 మీ ఖాతాలో 5 నిమిషాల్లో. ఇప్పుడే దరఖాస్తు చేసుకోండి: {{url}}",
+      "severity": "high",
+      "tags": [
+        "loan_app",
+        "telugu_phishing",
+        "fake_nbfc"
+      ],
+      "createdAt": 1792176673692,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793055,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x2da27981fbab459de2de46428bbf23ba234cbb86105fe47094930a8a83103a23",
+    "txHash": "0xd853b1cf10a48d1f6284cb2f725a04754b353c53225b7196ccb460c5dc2b1665",
+    "kind": "domain",
+    "indicator": "sbi-reward-points-redemption.site",
+    "category": "kyc",
+    "lang": "en",
+    "status": "confirmed",
+    "confirms": 3,
+    "payload": {
+      "title": "Spoofed SBI NetBanking Reward Points Portal",
+      "description": "Harvests Internet Banking username, password, profile password, and intercepted 2FA OTPs pretending to convert points into cash.",
+      "sampleTemplate": "Dear SBI Customer, your reward points worth Rs 8,750 will expire tonight. Redeem cash into account now: {{url}}",
+      "severity": "high",
+      "tags": [
+        "sbi_phishing",
+        "credential_harvesting",
+        "banking_fraud"
+      ],
+      "createdAt": 1792176679324,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793058,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xe4824d5680d172dfde54e5be611f5fe2e7f9045ae0c5e27b9c6f52f1ebb8a54c",
+    "txHash": "0xef1b293dadc1eb87b86b3abab9e37ab56b85a706a303e2f2eacb2ed6e9ff40a3",
+    "kind": "domain",
+    "indicator": "power-disconnection-billupdate.info",
+    "category": "kyc",
+    "lang": "hi",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Fake State Electricity Disconnection Notice Link",
+      "description": "Urgent phishing SMS claiming electricity power supply will be cut off at 9:30 PM tonight due to unpaid bill; prompts installing remote access app.",
+      "sampleTemplate": "प्रिय ग्राहक, आपकी बिजली का बिल अपडेट नहीं हुआ है, आज रात 9:30 बजे बिजली काट दी जाएगी। बिल जमा करने के लिए संपर्क करें: {{url}}",
+      "severity": "critical",
+      "tags": [
+        "electricity_scam",
+        "power_bill",
+        "remote_access_malware"
+      ],
+      "createdAt": 1792176685037,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793061,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x5899164774c9cfa5cd9f8542eec8dbcb297546dfd11399546836ea3e87613a83",
+    "txHash": "0x20b42351345dde59ae940535c43cb46056beaf390069fc5904f6290f9bd7b149",
+    "kind": "domain",
+    "indicator": "hdfc-pan-aadhaar-link-portal.xyz",
+    "category": "kyc",
+    "lang": "en",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Fake HDFC NetBanking PAN-Aadhaar Mandate Portal",
+      "description": "Threatens account deactivation within 24 hours unless PAN card and NetBanking credentials are submitted immediately.",
+      "sampleTemplate": "Dear HDFC User, your account has been temporarily restricted due to non-updated PAN card. Update KYC to prevent freeze: {{url}}",
+      "severity": "high",
+      "tags": [
+        "hdfc_spoof",
+        "kyc_freeze",
+        "pan_phishing"
+      ],
+      "createdAt": 1792176690691,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793064,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xa05163fa6b7256830bf18bd6a12a375f4fa1d927fa97c0b7a22d3c6f577eec2c",
+    "txHash": "0xafd6c14e7e1c5d242dfdb6e29710572051d29e44a2841045864c53e148cfafc9",
+    "kind": "domain",
+    "indicator": "epfo-uan-claim-passbook-update.vip",
+    "category": "kyc",
+    "lang": "hi",
+    "status": "confirmed",
+    "confirms": 3,
+    "payload": {
+      "title": "Spoofed EPFO Provident Fund Passbook Withdrawal Site",
+      "description": "Targets salaried employees claiming unclaimed provident fund bonus of Rs 42,000 waiting for immediate withdrawal.",
+      "sampleTemplate": "ईपीएफओ सूचना: आपके पीएफ खाते में ₹42,500 का क्लेम उपलब्ध है। तुरंत अपने खाते में ट्रांसफर करें: {{url}}",
+      "severity": "high",
+      "tags": [
+        "epfo_fraud",
+        "provident_fund",
+        "uan_harvest"
+      ],
+      "createdAt": 1792176696483,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793067,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0xc5aac42c9c1dbf50a2b048495fd322b7465862e3b0333c47691a774f8b7242fa",
+    "txHash": "0x0526ba53c8fd71b7ce21828d142e4dc62ff12c1f906d1e4940f67e4ac8b64077",
+    "kind": "domain",
+    "indicator": "youtube-hotel-review-earning.xyz",
+    "category": "job",
+    "lang": "en",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Fake YouTube / Google Maps Hotel Review Task Scam",
+      "description": "Victims are paid Rs 150 for the first 3 reviews on Telegram, then coerced into \"crypto VIP trading tasks\" losing lakhs.",
+      "sampleTemplate": "Earn Rs 3,500 - 8,000 daily from home just by liking YouTube videos and rating Google maps hotels! Contact HR on Telegram: {{url}}",
+      "severity": "high",
+      "tags": [
+        "part_time_job",
+        "telegram_task_scam",
+        "crypto_prepaid_task"
+      ],
+      "createdAt": 1792176702155,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793069,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x6ec0634de2d45b25d74037fb604ed399b3b7a7197d5db97f8f88d1d3184c19c2",
+    "txHash": "0xff6eef97d4948226f0a1fa3201929cefd22e009c3d7e64038dfb4016bea336eb",
+    "kind": "domain",
+    "indicator": "amazon-flipkart-mall-commission.top",
+    "category": "job",
+    "lang": "ta",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Spoofed E-Commerce Product Rating Commission Site",
+      "description": "Pretends to be an Amazon affiliate rating merchant portal; lures homemakers with small returns before freezing balances.",
+      "sampleTemplate": "வீட்டிலிருந்தே அமேசான் பொருட்களை மதிப்பீடு செய்து தினமும் ரூ. 5000 சம்பாதிக்கலாம். விவரங்களுக்கு இங்கே கிளிக் செய்யவும்: {{url}}",
+      "severity": "high",
+      "tags": [
+        "tamil_job_scam",
+        "ecommerce_task",
+        "affiliate_trap"
+      ],
+      "createdAt": 1792176707751,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793072,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x67b9213a91581c18aa8aa3b832af14a6c1dab982f4ecb5c9f0c15c5dc208219d",
+    "txHash": "0x5edcd2cf1843751f3e7bcd0f708fa04d49a8e0ab21defbce170678aff0e76d0d",
+    "kind": "upi",
+    "indicator": "olx-advance-refund-merchant@ybl",
+    "category": "upi",
+    "lang": "hi",
+    "status": "confirmed",
+    "confirms": 3,
+    "payload": {
+      "title": "Fake OLX Indian Army Officer Buyer UPI Handle",
+      "description": "Scammer poses as transferred Army officer wanting to buy furniture; sends a \"Collect Money / Pay\" QR code claiming it is to receive funds.",
+      "sampleTemplate": "I am transferring token advance of Rs 15,000. Scan this QR code and enter UPI PIN to receive money into your GooglePay/PhonePe.",
+      "severity": "high",
+      "tags": [
+        "army_olx_scam",
+        "reverse_qr_fraud",
+        "upi_collect"
+      ],
+      "createdAt": 1792176713484,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793075,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x40b4ed0614385edf477409c1329fce332cdd1cd82881bb7258d18edbdfd2007c",
+    "txHash": "0x32c43e7d5e2e8db86ba3956c009aeaeac099bdb84b04c8849c0ac46e259ac64e",
+    "kind": "upi",
+    "indicator": "customs-courier-dutyclearance@okhdfcbank",
+    "category": "upi",
+    "lang": "en",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Spoofed International Courier Customs Fee UPI VPA",
+      "description": "Used in tandem with romance/gift parcel scams where a fake foreign friend sends an expensive iPhone/jewelry parcel.",
+      "sampleTemplate": "Consignment parcel stuck at IGI Delhi Airport Customs. Deposit clearance fee of Rs 28,500 to VPA: {{url}}",
+      "severity": "medium",
+      "tags": [
+        "parcel_customs_scam",
+        "romance_fraud",
+        "upi_extortion"
+      ],
+      "createdAt": 1792176719257,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793078,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x988c7ea97e3870a20bacbcc07eaa1f7757b13c703f4f6dba289c0703e1a044bd",
+    "txHash": "0x38112a7b260327d92b5347f2afeb15cacd0ef7494dc56eefba18e129b8546c9a",
+    "kind": "domain",
+    "indicator": "echallan-parivahan-sewa-pay.top",
+    "category": "other",
+    "lang": "hi",
+    "status": "unconfirmed",
+    "confirms": 0,
+    "payload": {
+      "title": "Spoofed MoRTH eChallan Traffic Violation Fine Portal",
+      "description": "Phishing domain cloned identically to Parivahan portal; sends fake speed camera violation SMS with malware download link.",
+      "sampleTemplate": "Challan #DL-2026-9812 has been issued against your vehicle. Pay Rs 1,000 fine within 24h to avoid court summons: {{url}}",
+      "severity": "high",
+      "tags": [
+        "echallan_fraud",
+        "parivahan_spoof",
+        "traffic_police"
+      ],
+      "createdAt": 1792176725041,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793081,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  },
+  {
+    "key": "0x8671220a914f7cbc394d5320635a28275db15a06a6779a237e3591f9ac0f1e01",
+    "txHash": "0x84ff71666ce1ae5412e4efeb1f312cba5fc806695ef626f957e53ac0c595979e",
+    "kind": "domain",
+    "indicator": "karnataka-police-traffic-clearpay.site",
+    "category": "other",
+    "lang": "en",
+    "status": "confirmed",
+    "confirms": 3,
+    "payload": {
+      "title": "Fake Bengaluru Traffic Police 50% Fine Rebate Portal",
+      "description": "Capitalizes on periodic traffic police rebate announcements to harvest credit card and UPI credentials.",
+      "sampleTemplate": "BTP 50% discount on pending traffic fines valid for next 48 hours only! Check vehicle fines and pay online: {{url}}",
+      "severity": "medium",
+      "tags": [
+        "traffic_fine",
+        "karnataka_spoof",
+        "payment_gateway_phish"
+      ],
+      "createdAt": 1792176730903,
+      "reporter": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+    },
+    "expiresAtBlock": 793084,
+    "owner": "0xe7b30321edC5311Ddf589da2a01cD381Ba6Ac42D"
+  }
+]

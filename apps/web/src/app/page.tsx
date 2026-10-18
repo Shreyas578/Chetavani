@@ -22,8 +22,8 @@ import { ThreatSimulator } from '@/components/ThreatSimulator';
 import { AtBlockProof } from '@/components/AtBlockProof';
 import { ReportModal } from '@/components/ReportModal';
 
-// Seed initial reports for instant live browsing
-import { SYNTHETIC_INDIAN_SCAMS } from '../../../seed/src/synthetic-data.js';
+// Real on-chain verified entities with authentic Tiramisu transaction hashes
+import liveRegistryData from '@/lib/live-registry.json';
 
 export default function Home() {
   const [currentLang, setCurrentLang] = useState<LanguageCode>('en');
@@ -31,30 +31,12 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [selectedReportForProof, setSelectedReportForProof] = useState<ChetavaniReport | null>(null);
+  const [selectedReportForProof, setSelectedReportForProof] = useState<any | null>(null);
 
   const t = translations[currentLang];
 
-  // Convert synthetic seeds to initial report state
-  const [reports, setReports] = useState<ChetavaniReport[]>(() => {
-    return SYNTHETIC_INDIAN_SCAMS.map((s, idx) => ({
-      key: `0x${(idx + 10).toString(16).padStart(64, '0')}`,
-      kind: s.kind as any,
-      indicator: s.indicator,
-      category: s.category as any,
-      lang: s.lang as any,
-      status: idx % 3 === 0 ? 'confirmed' : 'unconfirmed',
-      confirms: idx % 3 === 0 ? 3 : 0,
-      payload: {
-        title: s.payload.title,
-        description: s.payload.description,
-        sampleTemplate: s.payload.sampleTemplate,
-        createdAt: Date.now() - idx * 3600000,
-        reporter: '0x3a4b...9f12',
-      },
-      expiresAtBlock: 154200 + idx * 100,
-    }));
-  });
+  // Initialize with live on-chain verified entities
+  const [reports, setReports] = useState<any[]>(liveRegistryData);
 
   // Filtered reports
   const filteredReports = useMemo(() => {
@@ -141,6 +123,14 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="w-24 h-24 mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-cyber-saffron/40 shadow-2xl shadow-cyber-saffron/20 bg-cyber-card">
+            <img
+              src="/logo.jpg"
+              alt="Chetavani Cyber-Garuda Emblem"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyber-saffron/10 border border-cyber-saffron/30 text-cyber-saffron text-xs font-semibold mb-4">
             <Radio className="w-3.5 h-3.5 animate-pulse" />
             <span>Community-Run Censorship-Resistant Registry</span>
