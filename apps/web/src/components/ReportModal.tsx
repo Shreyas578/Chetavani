@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Send, Mic, ShieldAlert, Sparkles } from 'lucide-react';
 import { IndicatorKind, ScamCategory, SupportedLanguage } from '@/arkiv-client';
 import { LanguageCode, translations } from '@/lib/i18n';
@@ -37,6 +37,12 @@ export const ReportModal: React.FC<ReportModalProps> = ({
   const [description, setDescription] = useState('');
   const [sampleTemplate, setSampleTemplate] = useState('');
   const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    if (initialIndicator) {
+      setIndicator(initialIndicator);
+    }
+  }, [initialIndicator]);
 
   if (!isOpen) return null;
 

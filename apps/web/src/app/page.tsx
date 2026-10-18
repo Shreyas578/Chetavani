@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   ShieldAlert,
   Search,
@@ -31,12 +31,25 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [prefilledIndicator, setPrefilledIndicator] = useState('');
   const [selectedReportForProof, setSelectedReportForProof] = useState<any | null>(null);
 
   const t = translations[currentLang];
 
   // Initialize with live on-chain verified entities
   const [reports, setReports] = useState<any[]>(liveRegistryData);
+
+  // Auto-open Report Modal if directed from Chrome Extension (?report=example.com)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const reportParam = params.get('report');
+      if (reportParam) {
+        setPrefilledIndicator(reportParam);
+        setIsReportModalOpen(true);
+      }
+    }
+  }, []);
 
   // Filtered reports
   const filteredReports = useMemo(() => {
@@ -306,9 +319,13 @@ export default function Home() {
       {/* Report Modal */}
       <ReportModal
         isOpen={isReportModalOpen}
-        onClose={() => setIsReportModalOpen(false)}
+        onClose={() => {
+          setIsReportModalOpen(false);
+          setPrefilledIndicator('');
+        }}
         onSubmit={handleCreateReport}
         currentLang={currentLang}
+        initialIndicator={prefilledIndicator}
       />
 
       {/* Footer */}
