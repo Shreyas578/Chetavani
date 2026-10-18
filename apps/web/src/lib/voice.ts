@@ -31,16 +31,43 @@ export function playVoiceWarning(text: string, lang: LanguageCode) {
 
     const voices = window.speechSynthesis.getVoices();
     if (voices && voices.length > 0) {
-      // Find matching language voice
-      const matched = voices.find(
+      // 1. Try exact language match (e.g. mr-IN, ta-IN, hi-IN)
+      let matched = voices.find(
         (v) =>
           v.lang.toLowerCase() === targetLang.toLowerCase() ||
           v.lang.toLowerCase().replace('_', '-').startsWith(lang)
       );
+
+      // 2. Fallback to Hindi (which reads Devanagari like Marathi, Hindi, Sanskrit natively)
+      if (!matched && (lang === 'mr' || lang === 'hi')) {
+        matched = voices.find(
+          (v) =>
+            v.lang.toLowerCase().startsWith('hi') ||
+            v.name.toLowerCase().includes('hindi') ||
+            v.name.toLowerCase().includes('kalpana') ||
+            v.name.toLowerCase().includes('hemant')
+        );
+      }
+
+      // 3. Fallback to Indian English (en-IN) which handles Indian accents/terms cleanly
+      if (!matched) {
+        matched = voices.find(
+          (v) =>
+            v.lang.toLowerCase() === 'en-in' ||
+            v.name.toLowerCase().includes('india') ||
+            v.name.toLowerCase().includes('neerja') ||
+            v.name.toLowerCase().includes('ravi')
+        );
+      }
+
       if (matched) {
         utterance.voice = matched;
       }
     }
+
+    utterance.onerror = (e) => {
+      console.warn('SpeechSynthesis error:', e);
+    };
 
     window.speechSynthesis.speak(utterance);
   };

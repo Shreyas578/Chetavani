@@ -39,22 +39,26 @@ export const ScamCard: React.FC<ScamCardProps> = ({
       .replace(/v1|v2/gi, '');
 
     const sample = report.payload?.sampleTemplate;
-    const sampleText = sample ? ` उदाहरण संदेश: "${sample}"` : '';
-    const sampleTextEn = sample ? ` Sample message: "${sample}"` : '';
+    const sampleHi = sample ? ` उदाहरण संदेश: "${sample}"` : '';
+    const sampleMr = sample ? ` उदाहरण संदेश: "${sample}"` : '';
+    const sampleEn = sample ? ` Sample message: "${sample}"` : '';
+    const sampleTa = sample ? ` மாதிரி செய்தி: "${sample}"` : '';
+    const sampleTe = sample ? ` ఉదాహరణ సందేశం: "${sample}"` : '';
+    const sampleBn = sample ? ` নমুনা বার্তা: "${sample}"` : '';
 
     let warningSpeech = '';
     if (currentLang === 'hi') {
-      warningSpeech = `सावधान! ${friendlyName}। यह डिजिटल फ्रॉड और साइबर अपराध के रूप में दर्ज है। किसी भी अनजान वीडियो कॉल, स्काइप कॉल या धमकी से डरें नहीं और पैसे ट्रांसफर न करें।${sampleText}`;
+      warningSpeech = `सावधान! ${friendlyName}। यह डिजिटल फ्रॉड और साइबर अपराध के रूप में दर्ज है। किसी भी अनजान वीडियो कॉल, स्काइप कॉल या धमकी से डरें नहीं और पैसे ट्रांसफर न करें।${sampleHi}`;
     } else if (currentLang === 'mr') {
-      warningSpeech = `सावधान! ${friendlyName}। ही संशयास्पद सायबर फसवणूक म्हणून नोंदवली गेली आहे. कोणत्याही डिजिटल अरेस्ट किंवा पोलिसांच्या खोट्या फोनला घाबरू नका आणि पैसे पाठवू नका. ${sampleText}`;
+      warningSpeech = `सावधान! ${friendlyName}। ही संशयास्पद सायबर फसवणूक म्हणून नोंदवली गेली आहे. कोणत्याही डिजिटल अरेस्ट किंवा पोलिसांच्या खोट्या फोनला घाबरू नका आणि पैसे पाठवू नका. ${sampleMr}`;
     } else if (currentLang === 'ta') {
-      warningSpeech = `எச்சரிக்கை! ${friendlyName} இணைய மோசடியாக பதிவு செய்யப்பட்டுள்ளது. பணப் பரிமாற்றம் செய்யாதீர்கள்.`;
+      warningSpeech = `எச்சரிக்கை! ${friendlyName} இணைய மோசடியாக பதிவு செய்யப்பட்டுள்ளது. பணப் பரிமாற்றம் செய்யாதீர்கள்.${sampleTa}`;
     } else if (currentLang === 'te') {
-      warningSpeech = `హెచ్చరిక! ${friendlyName} సైబర్ మోసంగా నమోదు చేయబడింది. ఎవరికీ డబ్బులు పంపవద్దు.`;
+      warningSpeech = `హెచ్చరిక! ${friendlyName} సైబర్ మోసంగా నమోదు చేయబడింది. ఎవరికీ డబ్బులు పంపవద్దు.${sampleTe}`;
     } else if (currentLang === 'bn') {
-      warningSpeech = `সতর্কতা! ${friendlyName} একটি বিপজ্জনক সাইবার প্রতারণা হিসেবে চিহ্নিত হয়েছে। কোনো টাকা পাঠাবেন না।`;
+      warningSpeech = `সতর্কতা! ${friendlyName} একটি বিপজ্জনক সাইবার প্রতারণা হিসেবে চিহ্নিত হয়েছে। কোনো টাকা পাঠাবেন না।${sampleBn}`;
     } else {
-      warningSpeech = `Warning! ${friendlyName}. This has been flagged as cyber extortion and fraud. Do not panic from fake arrest calls or transfer funds.${sampleTextEn}`;
+      warningSpeech = `Warning! ${friendlyName}. This has been flagged as cyber extortion and fraud. Do not panic from fake arrest calls or transfer funds.${sampleEn}`;
     }
 
     playVoiceWarning(warningSpeech, currentLang);
