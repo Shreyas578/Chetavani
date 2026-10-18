@@ -32,19 +32,28 @@ export const ScamCard: React.FC<ScamCardProps> = ({
   const t = translations[currentLang];
 
   const handleSpeak = () => {
+    // Format technical indicators into friendly spoken titles so Windows TTS doesn't trip on hyphens
+    const friendlyName = (report.payload?.title || report.indicator)
+      .replace(/-/g, ' ')
+      .replace(/_/g, ' ')
+      .replace(/v1|v2/gi, '');
+
+    const sampleText = report.payload?.sampleText ? ` उदाहरण संदेश: "${report.payload.sampleText}"` : '';
+    const sampleTextEn = report.payload?.sampleText ? ` Sample message: "${report.payload.sampleText}"` : '';
+
     let warningSpeech = '';
     if (currentLang === 'hi') {
-      warningSpeech = `चेतावनी! यह सूचक ${report.indicator} एक संदिग्ध फ्रॉड के रूप में दर्ज है। श्रेणी: ${t.categories[report.category] || report.category}। किसी भी प्रकार का भुगतान या ओटीपी साझा न करें।`;
+      warningSpeech = `सावधान! ${friendlyName}। यह डिजिटल फ्रॉड और साइबर अपराध के रूप में दर्ज है। किसी भी अनजान वीडियो कॉल, स्काइप कॉल या धमकी से डरें नहीं और पैसे ट्रांसफर न करें।${sampleText}`;
     } else if (currentLang === 'mr') {
-      warningSpeech = `सावधान! ${report.indicator} ही संशयास्पद सायबर फसवणूक म्हणून नोंदवली गेली आहे. कोणासही स्वतःची माहिती किंवा ओटीपी देऊ नका.`;
+      warningSpeech = `सावधान! ${friendlyName}। ही संशयास्पद सायबर फसवणूक म्हणून नोंदवली गेली आहे. कोणत्याही डिजिटल अरेस्ट किंवा पोलिसांच्या खोट्या फोनला घाबरू नका आणि पैसे पाठवू नका. ${sampleText}`;
     } else if (currentLang === 'ta') {
-      warningSpeech = `எச்சரிக்கை! ${report.indicator} ஆபத்தான இணைய மோசடியாக பதிவு செய்யப்பட்டுள்ளது. பணப் பரிமாற்றம் செய்யாதீர்கள்.`;
+      warningSpeech = `எச்சரிக்கை! ${friendlyName} இணைய மோசடியாக பதிவு செய்யப்பட்டுள்ளது. பணப் பரிமாற்றம் செய்யாதீர்கள்.`;
     } else if (currentLang === 'te') {
-      warningSpeech = `హెచ్చరిక! ${report.indicator} సైబర్ మోసంగా నమోదు చేయబడింది. ఎవరికీ ఓటీపీ లేదా డబ్బులు పంపవద్దు.`;
+      warningSpeech = `హెచ్చరిక! ${friendlyName} సైబర్ మోసంగా నమోదు చేయబడింది. ఎవరికీ డబ్బులు పంపవద్దు.`;
     } else if (currentLang === 'bn') {
-      warningSpeech = `সতর্কতা! ${report.indicator} একটি বিপজ্জনক সাইবার প্রতারণা হিসেবে চিহ্নিত হয়েছে। কোনো ওটিপি বা টাকা পাঠাবেন না।`;
+      warningSpeech = `সতর্কতা! ${friendlyName} একটি বিপজ্জনক সাইবার প্রতারণা হিসেবে চিহ্নিত হয়েছে। কোনো টাকা পাঠাবেন না।`;
     } else {
-      warningSpeech = `Warning! The indicator ${report.indicator} has been flagged for ${report.payload?.title || report.category}. Do not transfer funds or share sensitive OTPs.`;
+      warningSpeech = `Warning! ${friendlyName}. This has been flagged as cyber extortion and fraud. Do not panic from fake arrest calls or transfer funds.${sampleTextEn}`;
     }
 
     playVoiceWarning(warningSpeech, currentLang);
